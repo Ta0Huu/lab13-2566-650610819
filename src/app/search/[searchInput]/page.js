@@ -5,8 +5,8 @@ import { movieDB } from "@/libs/movieDB";
 
 export default function SearchResultPage({ params }) {
   const searchInput = params.searchInput;
-  const processedSearchInput = searchInput.replaceAll(" ", "%20");
-  //tip1 : before filtering movie, replace all "%20" with " " (space) in the input
+  const processedSearchInput = searchInput.replaceAll("%20", " ");
+  //tip1 : before filtering movie, replace all "%20" with  " " (space) in the input
   // const processedSearchInput = ...
   const lowerCaseInput = processedSearchInput.toLowerCase();
 
@@ -27,7 +27,7 @@ export default function SearchResultPage({ params }) {
   return (
     <div>
       <p className="fw-bold fs-4 text-center my-0">
-        Searching &quot; {searchInput} &quot;
+        Searching &quot; {processedSearchInput} &quot;
       </p>
       <p className="fw-bold fs-4 text-center">
         Found {filteredMovies.length} result(s)
