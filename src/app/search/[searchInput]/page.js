@@ -3,10 +3,16 @@
 import { MovieRow } from "@/components/MovieRow";
 import { movieDB } from "@/libs/movieDB";
 
-export default function SearchResultPage() {
+export default function SearchResultPage({ params }) {
+  const searchInput = params.searchInput;
+  const processedSearchInput = searchInput.replaceAll(" ", "%20");
   //tip1 : before filtering movie, replace all "%20" with " " (space) in the input
   // const processedSearchInput = ...
+  const lowerCaseInput = processedSearchInput.toLowerCase();
 
+  const filteredMovies = movieDB.filter((movie) =>
+    movie.title.toLowerCase().includes(lowerCaseInput)
+  );
   /*
   tip2 : Use "includes" string method to check substring
   Example : "ABC".includes("AB") -> return true
@@ -21,10 +27,20 @@ export default function SearchResultPage() {
   return (
     <div>
       <p className="fw-bold fs-4 text-center my-0">
-        Searching &quot; ... &quot;
+        Searching &quot; {searchInput} &quot;
       </p>
-      <p className="fw-bold fs-4 text-center">Found ... result(s)</p>
-      {/* Use  "filteredMovies" variable to map-loop rendering MovieRow component */}
+      <p className="fw-bold fs-4 text-center">
+        Found {filteredMovies.length} result(s)
+      </p>
+      {filteredMovies.map((movie, index) => (
+        <MovieRow
+          key={movie.id}
+          id={movie.id}
+          title={movie.title}
+          rating={movie.rating}
+          number={index + 1}
+        />
+      ))}
     </div>
   );
 }
