@@ -20,7 +20,8 @@ export default function SearchResultPage({ params }) {
   tip3 : To implement case insensitive searching, use "toLocaleLowerCase" string method
   to convert movie title and searchInput to lower case 
   const filteredMovies = movieDB.filter((movie) =>
-    you code here...
+    you code here...\
+    
   );
   */
 
